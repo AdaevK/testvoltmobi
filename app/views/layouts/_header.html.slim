@@ -10,4 +10,11 @@ nav.navbar.navbar-default.navbar-fixed-top
     #navbar.navbar-collapse.collapse
       ul.nav.navbar-nav
         li
-          = link_to 'Личный кабинет', '#'
+          - if user_signed_in?
+            = link_to 'Личный кабинет', '#'
+          - else
+            = link_to 'Вход в личный кабинет', new_user_session_path
+      - if user_signed_in?
+        ul.nav.navbar-nav.navbar-right
+          li
+            = link_to 'Выйти', destroy_user_session_path, method: :delete

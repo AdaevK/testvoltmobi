@@ -28,7 +28,6 @@ public/assets
 public/system
 
 ./shared/
-shared/
 
 # Bower components
 app/assets/components

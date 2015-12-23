@@ -1,0 +1,10 @@
+.form-group
+  = f.label :name, class: 'control-label'
+  = f.text_field :name, class: 'form-control'
+  - if @task.errors.has_key?(:name)
+    .help-block= @task.errors[:name].first
+.form-group
+  = f.label :description, class: 'control-label'
+  = f.text_area :description, class: 'form-control', rows: 5
+  - if @task.errors.has_key?(:description)
+    .help-block= @task.errors[:description].first

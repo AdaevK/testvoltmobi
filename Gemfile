@@ -6,8 +6,12 @@ gem 'rails', '4.2.5'
 gem 'pg', '~> 0.15'
 gem 'devise'
 gem 'devise-i18n'
+gem 'cancancan'
 gem 'aasm'
 gem 'will_paginate-bootstrap'
+gem 'inherited_resources', '~> 1.6.0'
+gem 'active_link_to'
+gem 'russian'
 
 #for Heroku
 gem 'rails_12factor'

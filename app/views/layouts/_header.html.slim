@@ -9,10 +9,10 @@ nav.navbar.navbar-default.navbar-fixed-top
       = link_to 'TestTM', root_path, class: 'navbar-brand'
     #navbar.navbar-collapse.collapse
       ul.nav.navbar-nav
-        li
-          - if user_signed_in?
-            = link_to 'Личный кабинет', '#'
-          - else
+        - if user_signed_in?
+          = active_link_to 'Личный кабинет', account_tasks_path, wrap_tag: :li
+        - else
+          li
             = link_to 'Вход в личный кабинет', new_user_session_path
       - if user_signed_in?
         ul.nav.navbar-nav.navbar-right

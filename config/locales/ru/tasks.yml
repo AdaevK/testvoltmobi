@@ -1,0 +1,7 @@
+ru:
+  activerecord:
+    attributes:
+      task:
+        name: Название
+        description: Описание
+        state: Статус

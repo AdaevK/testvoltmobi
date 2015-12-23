@@ -1,0 +1,9 @@
+.col-md-12
+  .page-header
+    h1 Новая задача
+  = form_for([:account, @task]) do |f|
+    = render partial: 'form', locals: { f: f }
+    .form-group
+      = f.submit 'Добавить', class: 'btn btn-primary'
+      '
+      = link_to 'К списку задач', account_tasks_path, class: 'btn btn-default'

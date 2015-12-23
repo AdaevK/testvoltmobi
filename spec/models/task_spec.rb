@@ -13,6 +13,10 @@ RSpec.describe Task, type: :model do
   it{ is_expected.to validate_presence_of(:name) }
   it{ is_expected.to validate_presence_of(:description) }
 
+  context 'default scope' do
+    it{ expect(Task.default_scoped.order_values).to eq ['created_at DESC'] }
+  end
+
   context 'aasm state' do
     context 'init (new)' do
       subject{ build(:task) }

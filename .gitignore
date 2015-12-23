@@ -28,6 +28,7 @@ public/assets
 public/system
 
 ./shared/
+vendor/bundle/
 
 # Bower components
 app/assets/components

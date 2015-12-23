@@ -1,0 +1,23 @@
+= link_to 'Добавить задачу', new_account_task_path(@task), class: 'btn btn-default'
+hr
+table.table.datatable.table-striped
+  thead
+    th Задача
+    th Описание
+    th Статус
+    th
+  tbody
+    - @tasks.each do |task|
+      tr
+        td style='width: 25%'
+          = link_to task.name, edit_account_task_path(task)
+        td= truncate task.description, length: 50
+        td= task.state
+        td
+          = link_to 'Просмотреть', account_task_path(task), class: 'btn btn-primary'
+          '
+          = link_to 'Редактировать', edit_account_task_path(task), class: 'btn btn-success'
+          '
+          = link_to 'Удалить', account_task_path(task), method: :delete, data: { confirm: 'Удалить задачу?' }, class: 'btn btn-danger'
+
+= will_paginate @tasks

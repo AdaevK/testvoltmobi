@@ -1,0 +1,16 @@
+h2= @task.name
+hr
+p
+  b Описание:
+  '
+  = simple_format @task.description
+p
+  b Статус:
+  '
+  = @task.state
+hr
+= link_to 'К списку задач', account_tasks_path, class: 'btn btn-default'
+'
+= link_to 'Редактировать', edit_account_task_path(@task), class: 'btn btn-success'
+'
+= link_to 'Удалить', account_task_path(@task), method: :delete, data: { confirm: 'Удалить задачу?' }, class: 'btn btn-danger'

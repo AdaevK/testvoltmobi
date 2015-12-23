@@ -6,6 +6,8 @@ class Task < ActiveRecord::Base
 
   validates :name, :description, presence: true
 
+  default_scope -> { order('created_at DESC') }
+
   aasm do
     state :new, initial: true
     state :started

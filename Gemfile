@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.5'
 gem 'pg', '~> 0.15'
+gem 'devise'
+gem 'aasm'
 
 gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3.5'
@@ -37,6 +39,7 @@ end
 
 group :test do
   gem 'rspec-rails', '~> 3'
+  gem 'rspec-its'
   gem 'shoulda-matchers', require: false
   gem 'database_cleaner'
 end

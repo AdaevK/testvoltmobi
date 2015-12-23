@@ -1,0 +1,10 @@
+- @tasks.each do |task|
+  .alert role='alert' class=class_for_state(task.state)
+    h2= task.name
+    = simple_format task.description
+    p
+      span.glyphicon.glyphicon-user aria-hidden='true'
+      '
+      small= task.user.email
+
+= will_paginate @tasks

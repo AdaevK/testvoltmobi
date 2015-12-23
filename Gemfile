@@ -4,6 +4,7 @@ gem 'rails', '4.2.5'
 gem 'pg', '~> 0.15'
 gem 'devise'
 gem 'aasm'
+gem 'will_paginate-bootstrap'
 
 gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3.5'
@@ -42,4 +43,5 @@ group :test do
   gem 'rspec-its'
   gem 'shoulda-matchers', require: false
   gem 'database_cleaner'
+  gem 'capybara'
 end

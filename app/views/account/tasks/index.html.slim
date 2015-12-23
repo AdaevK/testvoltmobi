@@ -5,14 +5,16 @@ table.table.datatable.table-striped
     th Задача
     th Описание
     th Статус
+    th Файл
     th
   tbody
     - @tasks.each do |task|
       tr
-        td style='width: 25%'
+        td style='width: 20%'
           = link_to task.name, edit_account_task_path(task)
         td= truncate task.description, length: 50
         td= task.state
+        td= task.decorate.file_link
         td
           = link_to 'Просмотреть', account_task_path(task), class: 'btn btn-primary'
           '

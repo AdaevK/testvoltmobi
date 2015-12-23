@@ -6,6 +6,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'shoulda/matchers'
+require "paperclip/matchers"
 require 'database_cleaner'
 require 'capybara/rspec'
 
@@ -27,6 +28,7 @@ end
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+  config.include Paperclip::Shoulda::Matchers
   config.include Devise::TestHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

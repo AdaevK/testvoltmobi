@@ -8,3 +8,19 @@
   = f.text_area :description, class: 'form-control', rows: 5
   - if @task.errors.has_key?(:description)
     .help-block= @task.errors[:description].first
+.form-group
+  = f.label :file, class: 'control-label'
+  - if @task.file.exists?
+    '
+    | (Прикреплен файл:
+    '
+    = @task.file.original_filename
+    | )
+  = f.file_field :file, class: 'form-control'
+  - if @task.errors.has_key?(:file)
+    .help-block= @task.errors[:file].first
+  - if @task.errors.has_key?(:file_content_type)
+    .help-block
+      | Формат файла
+      '
+      = @task.errors[:file_content_type].first

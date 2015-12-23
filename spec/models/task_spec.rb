@@ -5,6 +5,7 @@ RSpec.describe Task, type: :model do
   it{ is_expected.to have_db_column(:description).of_type(:text) }
   it{ is_expected.to have_db_column(:state).of_type(:string) }
   it{ is_expected.to have_db_column(:user_id).of_type(:integer) }
+  it{ is_expected.to have_attached_file(:file) }
 
   it{ is_expected.to have_db_index(:user_id) }
 
@@ -12,6 +13,8 @@ RSpec.describe Task, type: :model do
 
   it{ is_expected.to validate_presence_of(:name) }
   it{ is_expected.to validate_presence_of(:description) }
+  it{ is_expected.to validate_attachment_content_type(:file).allowing("application/pdf", "image/jpg", "image/jpeg", "image/gif", "image/png") }
+  it{ is_expected.to validate_attachment_size(:file).in(0..2.megabytes) }
 
   context 'default scope' do
     it{ expect(Task.default_scoped.order_values).to eq ['created_at DESC'] }

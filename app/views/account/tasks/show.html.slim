@@ -8,6 +8,10 @@ p
   b Статус:
   '
   = @task.state
+p
+  b Файл:
+  '
+  = @task.decorate.file_link
 hr
 = link_to 'К списку задач', account_tasks_path, class: 'btn btn-default'
 '

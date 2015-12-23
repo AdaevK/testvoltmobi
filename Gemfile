@@ -12,9 +12,8 @@ gem 'will_paginate-bootstrap'
 gem 'inherited_resources', '~> 1.6.0'
 gem 'active_link_to'
 gem 'russian'
-
-#for Heroku
-gem 'rails_12factor'
+gem 'paperclip', '~> 4.3'
+gem 'draper', '~> 1.3'
 
 gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3.5'
@@ -25,6 +24,11 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'autoprefixer-rails'
 
 gem 'jquery-rails'
+
+group :production do
+  #for Heroku
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   gem 'faker'

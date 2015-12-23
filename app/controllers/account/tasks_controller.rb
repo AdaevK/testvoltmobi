@@ -7,6 +7,6 @@ class Account::TasksController < Account::BaseController
   private
 
     def task_params
-      params.require(:task).permit(:name, :description, :state)
+      params.require(:task).permit(:name, :description, :file)
     end
 end

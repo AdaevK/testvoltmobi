@@ -1,7 +1,11 @@
 ru:
   activerecord:
+    errors:
+      messages:
+        in_between: "Максимальный размер файла должен быть не более %{max}"
     attributes:
       task:
         name: Название
         description: Описание
         state: Статус
+        file: Файл

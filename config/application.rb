@@ -17,6 +17,10 @@ Bundler.require(*Rails.groups)
 
 module Testvoltmobi
   class Application < Rails::Application
+    config.generators.assets = false
+    config.generators.helper = false
+    config.generators.view_specs false
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

@@ -1,4 +1,11 @@
 language: ruby
 rvm:
   - 2.2.3
+services:
+  - postgresql
+before_script:
+  - psql -U postgres -c 'create user vexor;'
+  - psql -U postgres -c 'create database testvoltmobi_test with owner vexor;'
+  - cp config/database.yml.travis config/database.yml
+  - bundle exec rake db:migrate RAILS_ENV=test
 script: bundle exec rspec

@@ -1,0 +1,14 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: vexor
+  password:
+
+development:
+  <<: *default
+  database: testvoltmobi_development
+
+test:
+  <<: *default
+  database: testvoltmobi_test

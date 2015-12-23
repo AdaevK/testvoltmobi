@@ -1,11 +1,18 @@
 language: ruby
 rvm:
-  - 2.2.3
+- 2.2.3
 services:
-  - postgresql
+- postgresql
 before_script:
-  - psql -U postgres -c 'create user vexor;'
-  - psql -U postgres -c 'create database testvoltmobi_test with owner vexor;'
-  - cp config/database.yml.travis config/database.yml
-  - bundle exec rake db:migrate RAILS_ENV=test
+- psql -U postgres -c 'create user vexor;'
+- psql -U postgres -c 'create database testvoltmobi_test with owner vexor;'
+- cp config/database.yml.travis config/database.yml
+- bundle exec rake db:migrate RAILS_ENV=test
 script: bundle exec rspec
+deploy:
+  provider: heroku
+  api_key:
+    secure: M0iZe+temUo8OT/8mW4OxlTmG43uFPO9ZaNOHzRyG7/LgcO+oO8QH9LURSzLmAxs68d5v8CRqSl9l3+l0UU/lN3mIKjge1p/wVOfbNX1TQDgFjXGTbTG2dy5rpRYtB7EVCBwhfrVzxSxRvMZahA1jhqP0/KIFkt0WXzsKsegG7Cgq8iFQXe6n2sp4I2gxmCSSNO6mnVtWRnnvmxhl7QmQAZYnvwO5ZIb2fXHnd0DdnwcWc6lMF9PtHhNsQt3NXy5KWK0MzVNpkqUFoXYOicK+R2pkfOh95d6/EyMel8nWxSy+GKj27NqFUswJztWm4YPHPmJ0BEKg+QClj9lhIvMzJ2RcP6QeFHAbpnkIQrnElbOpsEaHgDkD1RwNyYBZxaQ5PJ7n7AeD61+6RS9d1rMdmh6Q9ctjDCBFVhG+T+uP03KnxpfUF7ayx+MxTBv4w2r9wdjDWYBhB/ei5NhdZhBCmNN+Uf5j72v1wpct72MgqKZTTpkbMYWF26KmTihqcMd3SMdKOCPK5GPWC9YHlQRah8X1CCrIdHts0lyK4gveciBHoFf45X6hmOcYtPgi15mJZ6lqmQYVbIu7QRhwgWk/VrSoTCT7ghNkat/If8kL080fa4cblahQYnd/5/XfgOv2XyQ5qJwgCU9VQk3Vw55m1fVeRNsvACkkY+K5FQaVzs=
+  app: enigmatic-reef-6191
+  on:
+    repo: AdaevK/testvoltmobi

@@ -1,10 +1,15 @@
 source 'https://rubygems.org'
 
+ruby '2.2.3'
+
 gem 'rails', '4.2.5'
 gem 'pg', '~> 0.15'
 gem 'devise'
 gem 'aasm'
 gem 'will_paginate-bootstrap'
+
+#for Heroku
+gem 'rails_12factor'
 
 gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3.5'

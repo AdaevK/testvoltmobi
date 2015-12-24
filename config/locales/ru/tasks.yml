@@ -1,4 +1,9 @@
 ru:
+  tasks:
+    states:
+      new: Новая
+      started: Выполняется
+      finished: Завершена
   activerecord:
     errors:
       messages:

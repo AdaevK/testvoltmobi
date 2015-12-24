@@ -13,7 +13,7 @@ class Task < ActiveRecord::Base
 
   default_scope -> { order('created_at DESC') }
 
-  aasm do
+  aasm whiny_transitions: false do
     state :new, initial: true
     state :started
     state :finished
@@ -24,6 +24,10 @@ class Task < ActiveRecord::Base
 
     event :finish do
       transitions from: :started, to: :finished
+    end
+
+    event :rollback do
+      transitions from: :finished, to: :started
     end
   end
 end

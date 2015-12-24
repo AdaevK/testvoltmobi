@@ -175,6 +175,119 @@ RSpec.describe Account::TasksController, type: :controller do
     end
   end
 
+  context 'PATCH changed_state' do
+    let(:task){ create(:task, user: user) }
+
+    context 'authorized' do
+      login_user
+
+      context 'unknown event' do
+        before{ patch :changed_state, id: task.id, event: :unknown }
+
+        it{ expect(response).to redirect_to [:account, task] }
+        it{ expect(task.reload.state).to eq 'new' }
+        it{ expect(flash[:alert]).to eq 'Неверный статус.' }
+      end
+
+      context 'state new' do
+        context 'event start' do
+          before{ patch :changed_state, id: task.id, event: :start }
+
+          it{ expect(response).to redirect_to [:account, task] }
+          it{ expect(task.reload.state).to eq 'started' }
+          it{ expect(flash[:notice]).to eq 'Статус успешно изменен.' }
+        end
+
+        context 'event finish' do
+          before{ patch :changed_state, id: task.id, event: :finish }
+
+          it{ expect(response).to redirect_to [:account, task] }
+          it{ expect(task.reload.state).to eq 'new' }
+          it{ expect(flash[:alert]).to eq 'Неверный статус.' }
+        end
+
+        context 'event rollback' do
+          before{ patch :changed_state, id: task.id, event: :finish }
+
+          it{ expect(response).to redirect_to [:account, task] }
+          it{ expect(task.reload.state).to eq 'new' }
+          it{ expect(flash[:alert]).to eq 'Неверный статус.' }
+        end
+      end
+
+      context 'state started' do
+        let(:task){ create(:task, user: user, state: :started) }
+
+        context 'event start' do
+          before{ patch :changed_state, id: task.id, event: :start }
+
+          it{ expect(response).to redirect_to [:account, task] }
+          it{ expect(task.reload.state).to eq 'started' }
+          it{ expect(flash[:alert]).to eq 'Неверный статус.' }
+        end
+
+        context 'event finish' do
+          before{ patch :changed_state, id: task.id, event: :finish }
+
+          it{ expect(response).to redirect_to [:account, task] }
+          it{ expect(task.reload.state).to eq 'finished' }
+          it{ expect(flash[:notice]).to eq 'Статус успешно изменен.' }
+        end
+
+        context 'event rollback' do
+          before{ patch :changed_state, id: task.id, event: :rollback }
+
+          it{ expect(response).to redirect_to [:account, task] }
+          it{ expect(task.reload.state).to eq 'started' }
+          it{ expect(flash[:alert]).to eq 'Неверный статус.' }
+        end
+      end
+
+      context 'state finished' do
+        let(:task){ create(:task, user: user, state: :finished) }
+
+        context 'event start' do
+          before{ patch :changed_state, id: task.id, event: :start }
+
+          it{ expect(response).to redirect_to [:account, task] }
+          it{ expect(task.reload.state).to eq 'finished' }
+          it{ expect(flash[:alert]).to eq 'Неверный статус.' }
+        end
+
+        context 'event finish' do
+          before{ patch :changed_state, id: task.id, event: :finish }
+
+          it{ expect(response).to redirect_to [:account, task] }
+          it{ expect(task.reload.state).to eq 'finished' }
+          it{ expect(flash[:alert]).to eq 'Неверный статус.' }
+        end
+
+        context 'event rollback' do
+          before{ patch :changed_state, id: task.id, event: :rollback }
+
+          it{ expect(response).to redirect_to [:account, task] }
+          it{ expect(task.reload.state).to eq 'started' }
+          it{ expect(flash[:notice]).to eq 'Статус успешно изменен.' }
+        end
+      end
+
+      context 'access failure' do
+        let(:task){ create :task }
+
+        before{ patch :changed_state, id: task.id, event: :start }
+
+        it{ expect(response).to have_http_status 302 }
+        it{ expect(response).to redirect_to account_tasks_path }
+      end
+    end
+
+    context 'not authorized' do
+      before{ patch :changed_state, id: task.id, event: :start }
+
+      it_behaves_like 'not_authorized'
+    end
+  end
+
   context 'DELETE destroy' do
     let(:task){ create(:task, user: user) }
 

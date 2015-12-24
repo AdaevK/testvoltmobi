@@ -27,7 +27,7 @@ RSpec.describe Task, type: :model do
       it{ is_expected.to be_new }
       its(:start){ is_expected.to be_truthy }
 
-      it_behaves_like 'aasm_event_raise', [:finish]
+      it_behaves_like 'aasm_event_raise', [:finish, :rollback]
 
       context 'new to started' do
         before{ subject.start }
@@ -41,6 +41,8 @@ RSpec.describe Task, type: :model do
       it{ is_expected.to be_started }
       its(:finish){ is_expected.to be_truthy }
 
+      it_behaves_like 'aasm_event_raise', [:start, :rollback]
+
       context 'started to finished' do
         before{ subject.finish }
         it{ is_expected.to be_finished }
@@ -51,8 +53,14 @@ RSpec.describe Task, type: :model do
       subject{ build(:task, state: :finished) }
 
       it{ is_expected.to be_finished }
+      its(:rollback){ is_expected.to be_truthy  }
 
       it_behaves_like 'aasm_event_raise', [:start]
+
+      context 'finished to started' do
+        before{ subject.rollback }
+        it{ is_expected.to be_started }
+      end
     end
   end
 end
